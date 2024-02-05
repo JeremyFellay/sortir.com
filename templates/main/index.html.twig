@@ -11,7 +11,15 @@
 <div class="example-wrapper">
     <img src="{{ asset('img/logo-eni.png') }}" alt="logo ENI">
     <h1>Connexion</h1>
-C'est la page d'accueil du site sur cette page il y aura : page de connexion
+Veuillez vous connectez ci-dessous :
+ <form>
+     {{ form_errors(connexionForm) }}
 
+     {{ form_start(connexionForm) }}
+     {{ form_widget(connexionForm) }}
+
+     <button type="submit" class="btn">Enregistrer</button>
+     {{ form_end(connexionForm) }}
+ </form>
 </div>
 {% endblock %}

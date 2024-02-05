@@ -137,4 +137,8 @@ class Utilisateurs
 
         return $this;
     }
+
+    public function setRoles(array $array)
+    {
+    }
 }
