@@ -19,4 +19,5 @@ class MainController extends AbstractController
             'connexionForm' => $form -> createView(),
         ]);
     }
+
 }
