@@ -1,0 +1,14 @@
+<nav>
+    <ul>
+        {% if app.user %}
+        <li><a href="{{ path('app_connexion') }}" title="Accueil">Accueil</a></li>
+        <li><a href="{{ path('app_connexion') }}" title="Mon profil">Mon profil</a></li>
+        <li><a href="{{ path('app_connexion') }}" title="Se déconnecter">Se déconnecter</a></li>
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="{{ path('app_connexion')}}" title="Villes">Villes</a></li>
+                <li><a href="{{ path('app_connexion') }}" title="Campus">Campus</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</nav>
