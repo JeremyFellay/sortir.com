@@ -13,7 +13,7 @@ class Utilisateurs
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 30)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 50)]
@@ -25,17 +25,20 @@ class Utilisateurs
     #[ORM\Column(length: 10)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 101)]
+    #[ORM\Column(length: 100)]
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
     private ?string $motdepasse = null;
 
-    #[ORM\Column(length: 101)]
+    #[ORM\Column(length: 100)]
     private ?string $campus = null;
 
-    #[ORM\Column(length: 101, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $photo = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $roles = null;
 
     public function getId(): ?int
     {
@@ -138,7 +141,15 @@ class Utilisateurs
         return $this;
     }
 
-    public function setRoles(array $array)
+    public function getRoles(): ?string
     {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
