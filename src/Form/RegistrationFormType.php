@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,16 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('telephone')
-            ->add('campus')
+            ->add('campus', ChoiceType::class, [
+                'choices' => [
+                    'Rennes' => 'Rennes',
+                    'Nantes' => 'Nantes',
+                    'Niort' => 'Niort',
+                    'Quimper' => 'Quimper',
+                    'En ligne' => 'En ligne'
+                ],
+                'multiple' => false
+            ])
             ->add('photo')
             ->add('email')
             ->add('plainPassword', PasswordType::class, [

@@ -3,7 +3,12 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-5 text-primary">
+    <h1 class="text-center text-primary mt-3 pt-3 display-9 fw-bold">Créer un utilisateur</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -18,7 +23,12 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-
-        <button type="submit" class="btn">Register</button>
+            <div class="justify-content-center text-center">
+        <button class="btn btn-lg btn-primary" type="submit">Créer utilisateur</button>
     {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

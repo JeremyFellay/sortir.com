@@ -8,26 +8,40 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-    <h1 class="modifier-profil">Modifier mon profil </h1>
+    <div class="container-fluid">
+    <div class="row justify-content-center">
 
-    <div class="formulaire-modifier-profil">
+    <div class="col-5 text-primary">
+    <h1 class="text-center text-primary mt-3 pt-3 display-9 fw-bold">Modifier mon profil </h1>
+
     {{ form_errors(EditProfilForm) }}
 
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
     {{ form_start(EditProfilForm) }}
-    {{ form_row(EditProfilForm.pseudo, {'value': app.user.pseudo}) }}<br>
-    {{ form_row(EditProfilForm.prenom, {'value': app.user.prenom}) }}<br>
-    {{ form_row(EditProfilForm.nom , {'value': app.user.nom}) }}<br>
-    {{ form_row(EditProfilForm.telephone, {'value': app.user.telephone}) }}<br>
-    {{ form_row(EditProfilForm.campus, {'value': app.user.campus}) }}<br>
-    {{ form_row(EditProfilForm.photo, {'value': app.user.photo}) }}<br>
-    {{ form_row(EditProfilForm.email, {'value': app.user.email}) }}<br>
+    {{ form_row(EditProfilForm.pseudo, {'value': app.user.pseudo}) }}
+    {{ form_row(EditProfilForm.prenom, {'value': app.user.prenom}) }}
+    {{ form_row(EditProfilForm.nom , {'value': app.user.nom}) }}
+    {{ form_row(EditProfilForm.telephone, {'value': app.user.telephone}) }}
+    {{ form_row(EditProfilForm.campus, {'value': app.user.campus}) }}
+    {{ form_row(EditProfilForm.photo, {'value': app.user.photo}) }}
+    {{ form_row(EditProfilForm.email, {'value': app.user.email}) }}
     {{ form_row(EditProfilForm.plainPassword, {
         label: 'Password'
     }) }}
 
-    <button type="submit" class="btn">Annuler</button>
-    <button type="submit" class="btn">Enregistrer</button>
+
+    <div class="justify-content-center text-center">
+    <button class="btn btn-lg btn-secondary" type="submit" >Annuler</button>
+    <button class="btn btn-lg btn-primary" type="submit" >Enregistrer</button>
     {{ form_end(EditProfilForm) }}
+    </div>
+    </div>
+    </div>
 
     </div>
 {% endblock %}

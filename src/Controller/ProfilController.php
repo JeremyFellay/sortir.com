@@ -19,8 +19,21 @@ class ProfilController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Vos modifications sont enregistrées'
+            );
+
+            return $this->redirectToRoute('app_monprofil');
+        }
+
+        //$entityManager->persist($user);
+       //$entityManager->flush();
 
         return $this->render('profil/editerprofil.html.twig', [
             'EditProfilForm' => $form->createView(),

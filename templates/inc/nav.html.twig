@@ -6,8 +6,10 @@
         <li><a href="{{ path('app_logout') }}" title="Se déconnecter">Se déconnecter</a></li>
 
             {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="{{ path('app_register') }}" title="Créer utilisateur">Créer utilisateur</a></li>
                 <li><a href="{{ path('app_villes')}}" title="Villes">Villes</a></li>
                 <li><a href="{{ path('app_campus') }}" title="Campus">Campus</a></li>
+
             {% endif %}
         {% endif %}
     </ul>
