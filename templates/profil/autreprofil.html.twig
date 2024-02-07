@@ -1,3 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon profil {% endblock %}
+
 {% block body %}
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -5,14 +9,25 @@
     </style>
 
     <div class="example-wrapper">
-        <h2>Hello {{ utilisateur.pseudo }}! </h2>
+        <h2> {{ app.user.pseudo}} </h2>
 
-        <div>Prénom: {{ utilisateur.prenom }}</div>
-        <div>Nom: {{ utilisateur.nom }}</div>
-        <div>Téléphone: {{ utilisateur.telephone }}</div>
-        <div>Email: {{ utilisateur.email }}</div>
-        <div>Campus: {{ utilisateur.campus }}</div>
+        <div>
+            <div>Prénom : {{ app.user.prenom }}</div>
+            <div>Nom : {{ app.user.nom }}</div>
+            <div>Téléphone : {{ app.user.telephone }}</div>
+            <div>Email : {{ app.user.email }}</div>
+            <div>Campus : {{ app.user.campus }}</div>
+            <div>
 
+                <a href="{{ path('app_sorties') }}" class="#">Retour</a>
+            </div>
+        </div>
+        {# {{ form_start() }}
+            {{ form_widget() }}
+
+            <button type="submit" class="btn">Enregistrer</button>
+            <button type="button" class="btn">Annuler</button>
+            {{ form_end() }} #}
 
     </div>
 {% endblock %}

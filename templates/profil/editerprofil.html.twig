@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modifier mon profil {% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <h1>Modifier mon profil </h1>
+
+    {{ form_errors(EditProfilForm) }}
+
+    {{ form_start(EditProfilForm) }}
+    {{ form_row(EditProfilForm.pseudo, {'value': app.user.pseudo}) }}
+    {{ form_row(EditProfilForm.prenom, {'value': app.user.prenom}) }}
+    {{ form_row(EditProfilForm.nom , {'value': app.user.nom}) }}
+    {{ form_row(EditProfilForm.telephone, {'value': app.user.telephone}) }}
+    {{ form_row(EditProfilForm.campus, {'value': app.user.campus}) }}
+    {{ form_row(EditProfilForm.photo, {'value': app.user.photo}) }}
+    {{ form_row(EditProfilForm.email, {'value': app.user.email}) }}
+    {{ form_row(EditProfilForm.plainPassword, {
+        label: 'Password'
+    }) }}
+
+    <button type="submit" class="btn">Annuler</button>
+    <button type="submit" class="btn">Enregistrer</button>
+    {{ form_end(EditProfilForm) }}
+{% endblock %}

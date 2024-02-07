@@ -18,7 +18,8 @@
             <div>Email : {{ app.user.email }}</div>
             <div>Campus : {{ app.user.campus }}</div>
             <div>
-                <a href="#" class="#">Modifier le profil</a>
+
+                <a href="{{ path('app_profilmodifier') }}" class="#">Modifier</a>
                 <a href="{{ path('app_sorties') }}" class="#">Retour</a>
             </div>
         </div>
