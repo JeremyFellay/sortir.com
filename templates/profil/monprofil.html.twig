@@ -9,20 +9,17 @@
     </style>
 
     <div class="example-wrapper">
-        <h2> Mon profil ! </h2>
+        <h2> {{ app.user.pseudo}} </h2>
 
         <div>
-            <div>Pseudo : {{ app.user.pseudo }}</div>
             <div>Prénom : {{ app.user.prenom }}</div>
             <div>Nom : {{ app.user.nom }}</div>
             <div>Téléphone : {{ app.user.telephone }}</div>
             <div>Email : {{ app.user.email }}</div>
-            <div>Mot de passe : {{ app.user.password }}</div>
-            <div>Confirmation : {{ app.user.password }}</div>
             <div>Campus : {{ app.user.campus }}</div>
             <div>
                 <a href="#" class="#">Modifier le profil</a>
-                <a href="#" class="#">Modifier le mot de passe</a>
+                <a href="{{ path('app_sorties') }}" class="#">Retour</a>
             </div>
         </div>
         {# {{ form_start() }}
