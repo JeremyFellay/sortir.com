@@ -1,3 +1,19 @@
 body {
     background-color: skyblue;
 }
+
+.container {
+    text-align: center;
+}
+
+.titre-profil {
+    text-align: center;
+}
+
+.modifier-profil {
+    text-align: center;
+}
+
+.formulaire-modifier-profil {
+    text-align: center;
+}

@@ -9,26 +9,19 @@
     </style>
 
     <div class="example-wrapper">
-        <h2> {{ app.user.pseudo}} </h2>
+        <h2 class="titre-profil"> Mon profil </h2>
 
-        <div>
+        <div class="container">
+            <div>Pseudo : {{ app.user.pseudo }}</div>
             <div>Prénom : {{ app.user.prenom }}</div>
             <div>Nom : {{ app.user.nom }}</div>
             <div>Téléphone : {{ app.user.telephone }}</div>
             <div>Email : {{ app.user.email }}</div>
             <div>Campus : {{ app.user.campus }}</div>
-            <div>
 
                 <a href="{{ path('app_profilmodifier') }}" class="#">Modifier</a>
                 <a href="{{ path('app_sorties') }}" class="#">Retour</a>
             </div>
         </div>
-        {# {{ form_start() }}
-            {{ form_widget() }}
-
-            <button type="submit" class="btn">Enregistrer</button>
-            <button type="button" class="btn">Annuler</button>
-            {{ form_end() }} #}
-
     </div>
 {% endblock %}

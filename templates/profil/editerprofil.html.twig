@@ -8,18 +8,19 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-    <h1>Modifier mon profil </h1>
+    <h1 class="modifier-profil">Modifier mon profil </h1>
 
+    <div class="formulaire-modifier-profil">
     {{ form_errors(EditProfilForm) }}
 
     {{ form_start(EditProfilForm) }}
-    {{ form_row(EditProfilForm.pseudo, {'value': app.user.pseudo}) }}
-    {{ form_row(EditProfilForm.prenom, {'value': app.user.prenom}) }}
-    {{ form_row(EditProfilForm.nom , {'value': app.user.nom}) }}
-    {{ form_row(EditProfilForm.telephone, {'value': app.user.telephone}) }}
-    {{ form_row(EditProfilForm.campus, {'value': app.user.campus}) }}
-    {{ form_row(EditProfilForm.photo, {'value': app.user.photo}) }}
-    {{ form_row(EditProfilForm.email, {'value': app.user.email}) }}
+    {{ form_row(EditProfilForm.pseudo, {'value': app.user.pseudo}) }}<br>
+    {{ form_row(EditProfilForm.prenom, {'value': app.user.prenom}) }}<br>
+    {{ form_row(EditProfilForm.nom , {'value': app.user.nom}) }}<br>
+    {{ form_row(EditProfilForm.telephone, {'value': app.user.telephone}) }}<br>
+    {{ form_row(EditProfilForm.campus, {'value': app.user.campus}) }}<br>
+    {{ form_row(EditProfilForm.photo, {'value': app.user.photo}) }}<br>
+    {{ form_row(EditProfilForm.email, {'value': app.user.email}) }}<br>
     {{ form_row(EditProfilForm.plainPassword, {
         label: 'Password'
     }) }}
@@ -27,4 +28,6 @@
     <button type="submit" class="btn">Annuler</button>
     <button type="submit" class="btn">Enregistrer</button>
     {{ form_end(EditProfilForm) }}
+
+    </div>
 {% endblock %}
