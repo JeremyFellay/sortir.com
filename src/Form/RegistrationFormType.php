@@ -32,7 +32,6 @@ class RegistrationFormType extends AbstractType
                 ],
                 'multiple' => false
             ])
-            ->add('photo')
             ->add('email')
             ->add('plainPassword', PasswordType::class, [
                                 // instead of being set onto the object directly,
