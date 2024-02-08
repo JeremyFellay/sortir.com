@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\EditProfilType;
-use App\Form\RegistrationFormType;
+use App\Form\UpdatePasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,7 @@ class ProfilController extends AbstractController
     public function modifier(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this -> getUser();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
