@@ -1,0 +1,30 @@
+body {
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+/* Nav barre */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0559bb;
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    color: #e693e8;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav li a:hover {
+    background-color: #111;
+}
+
+/* Boutons */
+
