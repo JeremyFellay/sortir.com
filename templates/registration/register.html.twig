@@ -10,7 +10,11 @@
         <div class="col-5 text-primary">
     <h1 class="text-center text-primary mt-3 pt-3 display-9 fw-bold">Créer un utilisateur</h1>
 
-    {{ form_errors(registrationForm) }}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.pseudo) }}
@@ -18,10 +22,12 @@
     {{ form_row(registrationForm.nom) }}
     {{ form_row(registrationForm.telephone) }}
     {{ form_row(registrationForm.campus) }}
+    {{ form_errors(registrationForm) }}
     {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+    {{ form_row(registrationForm.plainPassword, {
+        label: 'Password'
         }) }}
+
             <div class="justify-content-center text-center">
         <button class="btn btn-lg btn-primary" type="submit">Créer utilisateur</button>
     {{ form_end(registrationForm) }}
