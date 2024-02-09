@@ -15,7 +15,7 @@
             <label>Nom : {{ app.user.nom }}</label>
             <label>Téléphone : {{ app.user.telephone }}</label>
             <label>Email : {{ app.user.email }}</label>
-            <label>Campus : {{ app.user.campus }}</label>
+           <label>Campus : {{ app.user.campus.nom }}</label>
 
                 <div class="justify-content-center text-center">
                 <a href="{{ path('app_profilmodifier') }}" class="btn btn-lg btn-primary">Modifier</a>

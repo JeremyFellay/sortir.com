@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,16 +21,8 @@ class EditProfilType extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('telephone')
-            ->add('campus', ChoiceType::class, [
-                'choices' => [
-                    'Rennes' => 'Rennes',
-                    'Nantes' => 'Nantes',
-                    'Niort' => 'Niort',
-                    'Quimper' => 'Quimper',
-                    'En ligne' => 'En ligne'
-                ],
-                'multiple' => false
-            ])
+            ->add('campus', EntityType::class, ['class' => Campus::class, 'choice_label' => 'nom'])
+
         //    ->add('photo')
         ;
     }
