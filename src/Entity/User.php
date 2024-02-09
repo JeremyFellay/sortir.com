@@ -57,9 +57,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users')]
+    private Collection $sortie;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->sortie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +234,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): static
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sorties>
+     */
+    public function getSortie(): Collection
+    {
+        return $this->sortie;
+    }
+
+    public function addSortie(Sorties $sortie): static
+    {
+        if (!$this->sortie->contains($sortie)) {
+            $this->sortie->add($sortie);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(Sorties $sortie): static
+    {
+        $this->sortie->removeElement($sortie);
 
         return $this;
     }

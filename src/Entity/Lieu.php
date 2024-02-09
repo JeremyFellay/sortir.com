@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LieuRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LieuRepository::class)]
@@ -27,6 +29,14 @@ class Lieu
 
     #[ORM\ManyToOne(inversedBy: 'Lieu')]
     private ?Ville $ville = null;
+
+    #[ORM\OneToMany(targetEntity: Sorties::class, mappedBy: 'lieu')]
+    private Collection $sortie;
+
+    public function __construct()
+    {
+        $this->sortie = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Lieu
     public function setVille(?Ville $ville): static
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sorties>
+     */
+    public function getSortie(): Collection
+    {
+        return $this->sortie;
+    }
+
+    public function addSortie(Sorties $sortie): static
+    {
+        if (!$this->sortie->contains($sortie)) {
+            $this->sortie->add($sortie);
+            $sortie->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(Sorties $sortie): static
+    {
+        if ($this->sortie->removeElement($sortie)) {
+            // set the owning side to null (unless already changed)
+            if ($sortie->getLieu() === $this) {
+                $sortie->setLieu(null);
+            }
+        }
 
         return $this;
     }
