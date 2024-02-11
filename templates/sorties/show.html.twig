@@ -31,30 +31,30 @@
                 <th>Description et infos</th>
                 <td>{{ sortie.infosSortie }}</td>
             </tr>
-            {# <tr>
+            <tr>
                 <th>Campus</th>
-                <td>{{ sortie.campus }}</td>
-            </tr> #}
-            {# <tr>
+                <td>{{ sortie.campus.nom }}</td>
+            </tr>
+            <tr>
                 <th>Lieu</th>
-                <td>{{ sortie.lieu }}</td>
-            </tr> #}
-            {# <tr>
+                <td>{{ sortie.lieu.nom }}</td>
+            </tr>
+            <tr>
                 <th>Rue</th>
-                <td>{{ sortie.rue }}</td>
-            </tr> #}
+                <td>{{ sortie.lieu.rue }}</td>
+            </tr>
             {# <tr>
                 <th>Code Postal</th>
                 <td>{{ sortie.codePostal }}</td>
             </tr> #}
-            {# <tr>
+            <tr>
                 <th>Latitude</th>
-                <td>{{ sortie.latitude }}</td>
-            </tr> #}
-            {# <tr>
+                <td>{{ sortie.lieu.latitude }}</td>
+            </tr>
+            <tr>
                 <th>Longitude</th>
-                <td>{{ sortie.longitude }}</td>
-            </tr> #}
+                <td>{{ sortie.lieu.longitude }}</td>
+            </tr>
         </tbody>
     </table>
 

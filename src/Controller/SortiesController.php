@@ -21,7 +21,7 @@ class SortiesController extends AbstractController
     public function index(SortiesRepository $sortiesRepository): Response
     {
         $user = $this->getUser();
-        $sorties = $sortiesRepository->findAll($user);
+        $sorties = $sortiesRepository->findAll();
 
 
         return $this->render('sorties/index.html.twig', [
@@ -92,4 +92,19 @@ class SortiesController extends AbstractController
 
         return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/inscription/{id}', name: 'app_sorties_inscription', methods: ['GET'])]
+    public function inscription(int $id, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager ): Response
+    {
+        $sortie = $sortiesRepository -> find($id);
+        $user = $this -> getUser();
+
+        $sortie -> addUser($user);
+        $entityManager -> persist($sortie);
+        $entityManager -> flush();
+
+
+        return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
+    }
+
 }
