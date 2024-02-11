@@ -38,7 +38,7 @@ class SortiesType extends AbstractType
             ->add('nbInscriptionsMax', TextType::class, [
                 'label' => 'Nombre de places'
             ])
-            ->add('duree', TextType::class, [
+            ->add('duree', IntegerType::class, [
                 'label' => 'Durée (en minutes)'
             ])
             ->add('infosSortie', TextareaType::class,[
@@ -46,15 +46,15 @@ class SortiesType extends AbstractType
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-'choice_label' => 'nom',
+                'choice_label' => 'nom',
             ])
             ->add('lieu', EntityType::class, [
                 'class' => Lieu::class,
-'choice_label' => 'nom',
+                'choice_label' => 'nom',
             ])
             ->add('etat', EntityType::class, [
                 'class' => Etat::class,
-'choice_label' => 'libelle',
+                'choice_label' => 'libelle',
             ])
         ;
     }
