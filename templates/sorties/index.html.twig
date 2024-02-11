@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sorties index{% endblock %}
+
+{% block body %}
+    <h1>Sorties index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Nom</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                {#<th>Duree</th> #}
+                <th>Nb inscrits max</th>
+                {# <th>Etat</th> #}
+                {# <th>Organisateur</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+       {% for sortie in sorties %}
+            <tr>
+                {#<td>{{ sortie.id }}</td>#}
+                <td>{{ sortie.nom }}</td>
+                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y à H:i:s') : '' }}</td>
+                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y') : '' }}</td>
+                <td>{{ sortie.nbInscriptionsMax }}</td>
+                {# <td>{{ sortie.etat }}</td> #}
+                {# <td>{{ sortie.organisateur }}</td> #}
+                <td>
+                    <a href="{{ path('app_sorties_show', {'id': sortie.id}) }}">Afficher</a>
+                    <a href="{{ path('app_sorties_edit', {'id': sortie.id}) }}">Modifier</a>
+                </td>
+            </tr>
+       {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+       {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="justify-content-center text-center">
+    <a href="{{ path('app_sorties_new') }}" class="btn btn-lg btn-primary">Créer une nouvelle sortie</a>
+    </div>
+{% endblock %}

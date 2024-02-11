@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
                 "L'utilisateur a bien été crée"
             );
 
-            return $this->redirectToRoute('app_sorties');
+            return $this->redirectToRoute('app_sorties_index');
         }
 
         return $this->render('registration/register.html.twig', [

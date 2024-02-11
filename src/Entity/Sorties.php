@@ -41,15 +41,15 @@ class Sorties
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'sortie')]
     private Collection $users;
 
-    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
@@ -209,4 +209,5 @@ class Sorties
 
         return $this;
     }
+
 }

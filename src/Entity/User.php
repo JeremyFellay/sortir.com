@@ -203,28 +203,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->sorties;
     }
 
-    public function addSorty(Sorties $sorty): static
-    {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties->add($sorty);
-            $sorty->setOrganisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSorty(Sorties $sorty): static
-    {
-        if ($this->sorties->removeElement($sorty)) {
-            // set the owning side to null (unless already changed)
-            if ($sorty->getOrganisateur() === $this) {
-                $sorty->setOrganisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCampus(): ?Campus
     {
         return $this->campus;

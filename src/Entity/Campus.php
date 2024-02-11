@@ -28,6 +28,7 @@ class Campus
     {
         $this->users = new ArrayCollection();
         $this->sortie = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,5 +106,13 @@ class Campus
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Sorties>
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
     }
 }

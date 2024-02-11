@@ -2,12 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Campus;
 use App\Entity\Sorties;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Sorties>
+ * @extends ServiceEntityRepository<Campus>
  *
  * @method Sorties|null find($id, $lockMode = null, $lockVersion = null)
  * @method Sorties|null findOneBy(array $criteria, array $orderBy = null)
@@ -26,10 +27,10 @@ class SortiesRepository extends ServiceEntityRepository
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
+//            ->orderBy('c.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
@@ -38,8 +39,8 @@ class SortiesRepository extends ServiceEntityRepository
 
 //    public function findOneBySomeField($value): ?Sorties
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

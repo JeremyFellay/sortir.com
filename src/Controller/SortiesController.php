@@ -3,71 +3,92 @@
 namespace App\Controller;
 
 use App\Entity\Sorties;
-use App\Entity\User;
-use App\Form\CreationSortieType;
-use App\Form\RegistrationFormType;
+use App\Form\SortiesType;
+use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
+use App\Repository\SortiesRepository;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/sorties')]
 class SortiesController extends AbstractController
 {
-    #[Route('/sorties', name: 'app_sorties')]
-    public function index(): Response
+    #[Route('/', name: 'app_sorties_index', methods: ['GET'])]
+    public function index(SortiesRepository $sortiesRepository): Response
     {
-        return $this->render('sorties/sorties.html.twig', [
-            'controller_name' => 'SortiesController',
+        $sorties = $sortiesRepository->findAll();
+        $user = $this->getUser();
+
+        return $this->render('sorties/index.html.twig', [
+            'sorties' => $sorties,
+            'user' => $user
         ]);
     }
 
-    #[Route('/sorties/afficher', name: 'app_afficherSorties')]
-    public function afficher(): Response
+    #[Route('/new', name: 'app_sorties_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
-        return $this->render('sorties/afficherSorties.html.twig', [
-            'controller_name' => 'SortiesController',
-        ]);
-    }
+       $sortie = new Sorties();
+       $user = $this -> getUser();
 
-    #[Route('/sorties/annuler', name: 'app_annulerSorties')]
-    public function annuler(): Response
-    {
-        return $this->render('sorties/annulerSorties.html.twig', [
-            'controller_name' => 'SortiesController',
-        ]);
-    }
-
-    #[Route('/sorties/creation', name: 'app_creationSorties')]
-    public function creation(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $sorties = new Sorties();
-        $form = $this->createForm(CreationSortieType::class, $sorties);
-        $form->handleRequest($request);
-        $form -> getErrors();
+       $sortie->setOrganisateur($user);
+        
+        $form = $this->createForm(SortiesType::class, $sortie);
+        $form-> handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager->persist($sorties);
+            $sortie -> setOrganisateur($user);
+            $entityManager->persist($sortie);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            $this->addFlash(
-                'success',
-                "La sortie a bien été crée"
-            );
-
-            return $this->redirectToRoute('app_sorties');
+            return $this->redirectToRoute('app_sorties_index');
         }
-        return $this->render('sorties/creationSorties.html.twig', [
-            'CreationSortieForm' => $form->createView(),
+
+        return $this->render('sorties/new.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form,
+            'user' => $user
         ]);
     }
-    #[Route('/sorties/modifier', name: 'app_modifierSorties')]
-    public function modifier(): Response
+
+    #[Route('/{id}', name: 'app_sorties_show', methods: ['GET'])]
+    public function show(Sorties $sortie): Response
     {
-        return $this->render('sorties/modifierSorties.html.twig', [
-            'controller_name' => 'SortiesController',
+        return $this->render('sorties/show.html.twig', [
+            'sortie' => $sortie,
         ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_sorties_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Sorties $sortie, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(SortiesType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('sorties/edit.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_sorties_delete', methods: ['POST'])]
+    public function delete(Request $request, Sorties $sortie, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($sortie);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
     }
 }
