@@ -49,14 +49,29 @@ class SortiesType extends AbstractType
                 'choice_label' => 'nom',
                 'mapped' => false
             ])
-
             ->add('lieu', EntityType::class, [
                 'class' => Lieu::class,
                 'choice_label' => 'nom',
             ])
-            ->add('etat', EntityType::class, [
-                'class' => Etat::class,
-                'choice_label' => 'libelle',
+            ->add('rue', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'rue'
+            ])
+            ->add('codePostal', EntityType::class, [
+                'class' => Ville::class,
+                'mapped' => false,
+                'choice_label' => 'code_postal'
+            ])
+            ->add('latitude', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'latitude'
+            ])
+            ->add('longitude', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'longitude'
             ])
         ;
     }

@@ -15,7 +15,10 @@
             Campus : {{ app.user.campus.nom }}
             {{ form_row(form.ville) }}
             {{ form_row(form.lieu) }}
-            {{ form_row(form.etat) }}
+            {{ form_row(form.rue) }}
+            {{ form_row(form.codePostal) }}
+            {{ form_row(form.latitude) }}
+            {{ form_row(form.longitude) }}
 
             <div class="justify-content-center text-center">
     <button class="btn btn-lg btn-primary">{{ button_label|default('Enregistrer') }}</button>
