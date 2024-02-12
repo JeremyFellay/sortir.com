@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Entity\Sorties;
 use App\Form\SortiesType;
 use App\Repository\EtatRepository;
@@ -37,7 +38,8 @@ class SortiesController extends AbstractController
        $user = $this -> getUser();
 
        $sortie->setOrganisateur($user);
-        
+       $sortie -> setCampus($user -> getCampus());
+
         $form = $this->createForm(SortiesType::class, $sortie);
         $form-> handleRequest($request);
 
