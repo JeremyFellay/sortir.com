@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\FiltersSorties;
 use App\Entity\Lieu;
 use App\Entity\Sorties;
+use App\Form\FiltersSortiesType;
 use App\Form\SortiesType;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
@@ -18,17 +20,29 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/sorties')]
 class SortiesController extends AbstractController
 {
-    #[Route('/', name: 'app_sorties_index', methods: ['GET'])]
-    public function index(SortiesRepository $sortiesRepository): Response
+    #[Route('/', name: 'app_sorties_index', methods: ['GET', 'POST'])]
+    public function index(SortiesRepository $sortiesRepository, Request $request): Response
     {
-        $user = $this->getUser();
         $sorties = $sortiesRepository->findAll();
 
+        // Classe D.T.O.
+        $oFilters = new FiltersSorties();
 
-        return $this->render('sorties/index.html.twig', [
+        // On associe la classe de D.T.O. à son formulaire spécifique, ici FiltersSortiesFormType::class
+        $form = $this->createForm(FiltersSortiesType::class, $oFilters);
+        $form->handleRequest($request);
+
+        // On récupère l'utilisateur connecté
+        $oUser = $this->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sorties = $sortiesRepository->findFilteredSorties($oFilters, $oUser);
+        }
+
+
+        return $this->render('sorties/index.html.twig',[
             'sorties' => $sorties,
-            'user' => $user
-
+            'filtersForm' => $form->createView()
         ]);
     }
 
