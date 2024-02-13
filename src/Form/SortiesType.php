@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -73,10 +74,12 @@ class SortiesType extends AbstractType
                 'mapped' => false,
                 'choice_label' => 'longitude'
             ])
-            ->add('etat', EntityType::class, [
-                'class' => Etat::class,
-                'choice_label' => 'libelle'])
-        ;
+            ->add('save', SubmitType::class,[
+                'label'=>'Enregistrer'
+            ])
+            ->add('saveAndAdd', SubmitType::class,[
+                'label'=>'Publier une sortie'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

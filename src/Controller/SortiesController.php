@@ -40,7 +40,7 @@ class SortiesController extends AbstractController
         }
 
 
-        return $this->render('sorties/index.html.twig',[
+        return $this->render('sorties/index.html.twig', [
             'sorties' => $sorties,
             'filtersForm' => $form->createView()
         ]);
@@ -49,19 +49,24 @@ class SortiesController extends AbstractController
     #[Route('/new', name: 'app_sorties_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
-       $sortie = new Sorties();
-       $user = $this -> getUser();
+        $sortie = new Sorties();
+        $user = $this->getUser();
 
-       $sortie->setOrganisateur($user);
-       $sortie -> setCampus($user -> getCampus());
+        $sortie->setOrganisateur($user);
+        $sortie->setCampus($user->getCampus());
+        $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Créée']));
 
         $form = $this->createForm(SortiesType::class, $sortie);
-        $form-> handleRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie -> setOrganisateur($user);
+            $sortie->setOrganisateur($user);
             $entityManager->persist($sortie);
             $entityManager->flush();
+
+            if ($form->get('saveAndAdd')->isClicked()) {
+                return $this->redirectToRoute('app_sorties_publier', ['id' => $sortie->getId()]);
+            }
 
             return $this->redirectToRoute('app_sorties_index');
         }
@@ -82,20 +87,30 @@ class SortiesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_sorties_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sorties $sortie, EntityManagerInterface $entityManager): Response
+    public function edit(int $id, Request $request, Sorties $sortie, EntityManagerInterface $entityManager, SortiesRepository $sortiesRepository): Response
     {
-        $form = $this->createForm(SortiesType::class, $sortie);
+        $sortieModifier = $sortiesRepository->find($id);
+
+        $form = $this->createForm(SortiesType::class, $sortieModifier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
+            $entityManager->persist($sortieModifier);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre sortie est bien modifiée');
+            if ($form->get('saveAndAdd')->isClicked()) {
+                return $this->redirectToRoute('app_sorties_publier', ['id' => $sortieModifier->getId()]);
+            }
+            return $this->redirectToRoute('app_sorties_index');
         }
+        {
+                $this->addFlash('danger', 'La modification n\'est pas permise pour cette sortie.');
+            }
 
         return $this->render('sorties/edit.html.twig', [
             'sortie' => $sortie,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 
@@ -136,15 +151,7 @@ class SortiesController extends AbstractController
         }
         return $this->redirectToRoute('app_sorties_index');
 
-
-
-
-
-
-
-
-
-        return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
+        //return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/desinscription/{id}', name: 'app_sorties_desinscription', methods: ['GET'])]
@@ -161,4 +168,22 @@ class SortiesController extends AbstractController
         return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/sorties/publier/{id}', name: 'app_sorties_publier', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function publierSortie(int $id, SortiesRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $sortiePublier = $sortieRepository->find($id);
+        $today = new \DateTime('now');
+        if ($sortiePublier -> getDateLimiteInscription() >= $today && $sortiePublier->getDateHeureDebut() >= $today ){
+            if ($sortiePublier->getEtat()->getLibelle() =='Créée'){
+                $sortiePublier->setEtat($etatRepository->findOneBy(['libelle'=>'Ouverte']));
+                $entityManager->persist($sortiePublier);
+                $entityManager->flush();
+                $this->addFlash('success', 'La sortie a bien été publiée');
+            }
+        }else{
+            $this->addFlash('warning', "la date d'inscription ou la date de sortie est dépassée");
+        }
+
+        return $this->redirectToRoute('app_sorties_index');
+    }
 }

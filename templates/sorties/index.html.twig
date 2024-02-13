@@ -18,8 +18,8 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col offset-sm-10">
-                <p>Date du jour : {{ "now"|date("d M Y") }} </p>
-                <p>Participant : {{ app.user.prenom }} {{ app.user.nom }}</p>
+                <p>Date du jour : {{ "now"|date("d/m/Y") }} </p>
+                <p>Participant : {{ app.user.prenom }} {{ app.user.nom | slice(0,1) ~ '.' }}</p>
             </div>
         </div>
         {{ form_start(filtersForm) }}
@@ -52,8 +52,6 @@
                 <thead>
                 <tr>
                     <th>Nom de la sortie</th>
-                    <th>Lieu</th>
-                    <th>Ville</th>
                     <th>Date de la sortie</th>
                     <th>Clôture</th>
                     <th>Inscrits / places</th>
@@ -67,10 +65,8 @@
                 {% for sortie in sorties %}
                     <tr>
                         <td>{{ sortie.nom }}</td>
-                        <td>{{ sortie.lieu.nom }}</td>
-                        <td>{{ sortie.lieu.ville.nom }}</td>
-                        <td>{{ sortie.dateHeureDebut|date('d/m/Y H:i') }}</td>
-                        <td>{{ sortie.dateLimiteInscription|date('d/m/Y h:i') }}</td>
+                        <td>{{ sortie.dateHeureDebut|date('d/m/Y à H:i') }}</td>
+                        <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
                         <td>{{ sortie.users.count() }} / {{ sortie.nbInscriptionsMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
                         <td class="text-center">
@@ -83,7 +79,7 @@
                             {% endfor %}
                         </td>
                         <td>
-                            <a href="{{ path('app_autreprofil', {id: sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }}</a>
+                            <a href="{{ path('app_autreprofil', {id: sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom | slice(0,1) ~ '.' }}</a>
                         </td>
                         <td>
                             <a href="{{ path('app_sorties_show', {id: sortie.id}) }}">Afficher</a>
