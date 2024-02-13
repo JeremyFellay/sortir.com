@@ -9,17 +9,17 @@
     </style>
 
     <div class="example-wrapper">
-        <h2> {{ app.user.pseudo}} </h2>
+        <h2> {{ user.pseudo}} </h2>
 
         <div>
-            <div>Prénom : {{ app.user.prenom }}</div>
-            <div>Nom : {{ app.user.nom }}</div>
-            <div>Téléphone : {{ app.user.telephone }}</div>
-            <div>Email : {{ app.user.email }}</div>
-          <div>Campus : {{ app.user.campus.nom }}</div>
+            <div>Prénom : {{ user.prenom }}</div>
+            <div>Nom : {{ user.nom }}</div>
+            <div>Téléphone : {{ user.telephone }}</div>
+            <div>Email : {{ user.email }}</div>
+          <div>Campus : {{ user.campus.nom }}</div>
             <div>
 
-                <a href="{{ path('app_sorties') }}" class="#">Retour</a>
+                <a href="{{ path('app_sorties_index') }}" class="#">Retour</a>
             </div>
         </div>
         {# {{ form_start() }}

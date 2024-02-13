@@ -28,7 +28,9 @@
 
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>{{ sortie.users.contains(app.user) ? 'X' : '' }}</td>
-                <td>{{ sortie.organisateur.nom }}</td>
+                <td>
+                    <a href="{{ path('app_autreprofil',{'id': sortie.organisateur.id}) }}">{{sortie.organisateur.nom}}</a>
+                </td>
                 <td>
                     <a href="{{ path('app_sorties_show', {'id': sortie.id}) }}">Afficher</a>
                     <a href="{{ path('app_sorties_edit', {'id': sortie.id}) }}">Modifier</a>

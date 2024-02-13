@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ChangePasswordFormType;
 use App\Form\EditProfilType;
 use App\Form\UpdatePasswordType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -93,6 +94,15 @@ class ProfilController extends AbstractController
                 'ChangePasswordForm' => $form->createView(),
             ]);
         }
+    #[Route('/autreprofil/{id}', name: 'app_autreprofil', methods: ['GET'])]
+    public function autreprofil(int $id, UserRepository $userRepository): Response
+    {
+        $user=$userRepository -> find($id);
+
+        return $this->render('profil/autreprofil.html.twig', [
+            'user' => $user,
+        ]);
+    }
     }
 
 

@@ -73,6 +73,9 @@ class SortiesType extends AbstractType
                 'mapped' => false,
                 'choice_label' => 'longitude'
             ])
+            ->add('etat', EntityType::class, [
+                'class' => Etat::class,
+                'choice_label' => 'libelle'])
         ;
     }
 

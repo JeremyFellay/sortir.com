@@ -28,6 +28,7 @@ class SortiesController extends AbstractController
         return $this->render('sorties/index.html.twig', [
             'sorties' => $sorties,
             'user' => $user
+
         ]);
     }
 
