@@ -4,6 +4,17 @@
 
 {% block body %}
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="container mt-3">
         <div class="row">
             <div class="col offset-sm-10">
@@ -80,9 +91,13 @@
                                 <a href="{{ path('app_sorties_edit', {id: sortie.id}) }}">Modifier</a>
                             {% endif %}
                             {% if inscrit %}
-                                <a href="{{ path('app_sorties_delete', {id: sortie.id}) }}">Se désister</a>
-                            {% else %}
-                                <a href="{{ path('app_sorties_inscription', {id: sortie.id}) }}">S'inscrire</a>
+                                <a href="{{ path('app_sorties_desinscription', {id: sortie.id}) }}">Se désister</a>
+                           {#{% else %} #}
+                            {% endif %}
+
+                                {% if sortie.etat.libelle == 'Ouverte' %}
+                                    <a href="{{ path('app_sorties_inscription', {id: sortie.id}) }}">S'inscrire</a>
+
                             {% endif %}
                         </td>
                     </tr>

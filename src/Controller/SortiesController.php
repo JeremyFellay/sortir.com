@@ -115,8 +115,45 @@ class SortiesController extends AbstractController
     {
         $sortie = $sortiesRepository -> find($id);
         $user = $this -> getUser();
+        $today = new \DateTime('now');
 
-        $sortie -> addUser($user);
+        $inscriptionPossible = $sortie
+            && $sortie->getEtat()->getLibelle()=='Ouverte'
+            && $sortie->getDateLimiteInscription() >= $today
+            && count ($sortie->getUsers()) < $sortie->getNbInscriptionsMax();
+        if($inscriptionPossible)
+        {
+            $sortie->addUser($user);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+           // $inscriptionEvent = new Sorties($sortie);
+          //  $dispatcher->dispatch($inscriptionEvent, Sorties::INSCRIPTION);
+            $this->addFlash('success', 'Votre inscription a été prise en compte.');
+        }
+        else
+        {
+            $this->addFlash('warning', 'Votre inscription n\'a pas pu être prise en compte (l\'organisateur.ice a annulé la sortie, le nombre maximum de participant.e.s est atteint ou la date limite d\'inscription est dépassée).');
+        }
+        return $this->redirectToRoute('app_sorties_index');
+
+
+
+
+
+
+
+
+
+        return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/desinscription/{id}', name: 'app_sorties_desinscription', methods: ['GET'])]
+    public function desinscription(int $id, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager ): Response
+    {
+        $sortie = $sortiesRepository -> find($id);
+        $user = $this -> getUser();
+
+        $sortie -> removeUser($user);
         $entityManager -> persist($sortie);
         $entityManager -> flush();
 
