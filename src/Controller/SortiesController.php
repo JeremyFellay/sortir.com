@@ -214,4 +214,17 @@ class SortiesController extends AbstractController
 
         return $this->redirectToRoute('app_sorties_index');
     }
+
+   // #[Route('/sorties/archives/{id}', name: 'app_sorties_archives', requirements: ['id' => '\d+'], methods: ['GET'])]
+    //   public function archiver(SortiesRepository $sortiesRepository)
+    //  {
+    //     $archives = $sortiesRepository->findStillDisplayedSorties();
+
+        // Vous pouvez ensuite transmettre $stillDisplayedSorties à votre vue ou effectuer d'autres opérations avec ces sorties.
+    //    return $this->render('sorties/index.html.twig', [
+    //       'stillDisplayedSorties' => $archives,
+    //   ]);
+
+
+    // }
 }
