@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\FiltersSorties;
 use App\Entity\Lieu;
 use App\Entity\Sorties;
+use App\Form\AnnulerSortieType;
 use App\Form\FiltersSortiesType;
 use App\Form\SortiesType;
 use App\Repository\EtatRepository;
@@ -125,6 +126,33 @@ class SortiesController extends AbstractController
         return $this->redirectToRoute('app_sorties_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/annuler/{id}', name: 'app_sorties_annuler', methods: ['GET', 'POST'])]
+    public function annuler(EntityManagerInterface $entityManager,EtatRepository $etatRepository,Request $request, Sorties $sortie, int $id, SortiesRepository $sortiesRepository): Response
+    {
+        $sortieModifier = $sortiesRepository->find($id);
+        $today = new \DateTime('now');
+        $form = $this->createForm(AnnulerSortieType::class, $sortieModifier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if($sortieModifier->getdateHeureDebut() > $today) {
+                $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Annulée']));
+
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                $this->addFlash('success', 'La sortie a été annulée.');
+            }
+            else
+            {
+                $this->addFlash('danger', 'Vous ne pouvez pas annuler cette sortie (elle est en cours).');
+            }
+            return $this->redirectToRoute('app_sorties_index');
+        }
+        return $this->render('sorties/annuler.html.twig', [
+            'AnnulerForm' => $form->createView()
+        ]);
+    }
+
     #[Route('/inscription/{id}', name: 'app_sorties_inscription', methods: ['GET'])]
     public function inscription(int $id, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager ): Response
     {
@@ -172,7 +200,7 @@ class SortiesController extends AbstractController
     public function publierSortie(int $id, SortiesRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
     {
         $sortiePublier = $sortieRepository->find($id);
-        $today = new \DateTime('now');
+        $today = new \DateTime('today');
         if ($sortiePublier -> getDateLimiteInscription() >= $today && $sortiePublier->getDateHeureDebut() >= $today ){
             if ($sortiePublier->getEtat()->getLibelle() =='Créée'){
                 $sortiePublier->setEtat($etatRepository->findOneBy(['libelle'=>'Ouverte']));

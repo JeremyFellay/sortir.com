@@ -1,7 +1,9 @@
  body {
-     background: rgb(64,141,134);
-     background: linear-gradient(90deg, rgba(64,141,134,1) 0%, rgba(206,204,149,1) 10%, rgba(205,250,246,1) 20%, rgba(206,204,149,1) 30%, rgba(64,141,134,1) 40%, rgba(206,204,149,1) 50%, rgba(205,250,246,1) 60%, rgba(206,204,149,1) 70%, rgba(64,141,134,1) 80%, rgba(206,204,149,1) 90%, rgba(205,250,246,1) 100%);
-}
+     background-image: url('../img/fond1.jpg');
+     background-size: cover;
+     opacity: 0.9;
+ }
+
 
 /* Nav barre
 nav ul {
