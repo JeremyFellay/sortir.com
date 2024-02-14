@@ -6,7 +6,6 @@ use App\Entity\Campus;
 use App\Entity\Sorties;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @extends ServiceEntityRepository<Campus>
@@ -23,7 +22,30 @@ class SortiesRepository extends ServiceEntityRepository
         parent::__construct($registry, Sorties::class);
     }
 
+//    /**
+//     * @return Sorties[] Returns an array of Sorties objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('c.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
+//    public function findOneBySomeField($value): ?Sorties
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
     public function findFilteredSorties(\App\Entity\FiltersSorties $oFilters, ?\Symfony\Component\Security\Core\User\UserInterface $oUser)
     {
         // Récupérer les critères de filtrage depuis l'objet $oFilters
@@ -88,35 +110,5 @@ class SortiesRepository extends ServiceEntityRepository
         // Retourner les résultats de la requête
         return $query->getResult();
     }
-
-  //  public function findStillDisplayedSorties(Sorties $sorties): array
-  //  {
-  //      $today = new DateTime('-1 month');
-// Récupérer les critères de filtrage depuis l'objet $oFilters
-     //   $datepasse = $sorties->getDateLimiteInscription();
-
-        // Ajouter d'autres critères de filtrage si nécessaire...
-
-        // Construire la requête pour récupérer les sorties
-     //   $queryBuilder = $this->createQueryBuilder('s')
-        //    ->leftJoin('s.organisateur', 'o')
-          //  ->leftJoin('s.users', 'p');
-
-        //if ($campus !== null) {
-          //  $queryBuilder->andWhere('s.campus = :campus')
-            //    ->setParameter('campus', $campus);
-        //}
- //   }
-
-
-
-
-
-
-
-
-
-
-
 
 }
