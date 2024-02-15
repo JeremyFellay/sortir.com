@@ -1,9 +1,13 @@
 body {
-     background-image: url('../img/fond1.jpg');
-     background-size: cover;
+   /*  background-image: url('../img/fond1.jpg');
+     background-size: cover; */
      opacity: 0.9;
+    padding-bottom: 50px;
  }
-
+.navbar-brand {
+    font-family: Montserrat;
+    font-weight: 800;
+}
 /* Nav barre
 nav ul {
     list-style-type: none;

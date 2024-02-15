@@ -3,9 +3,9 @@
 {% block title %}New Sorties{% endblock %}
 
 {% block body %}
-    <h1 class="text-center text-primary mt-3 pt-3 display-9 fw-bold">Créer une nouvelle sortie</h1>
+    <h1 class="text-center mt-3 pt-3 display-9 fw-bold">Créer une nouvelle sortie</h1>
 
     {{ include('sorties/_form.html.twig') }}
 
-    <a href="{{ path('app_sorties_index') }}" class="btn btn-lg btn-secondary">Retour à la liste</a>
+    <a href="{{ path('app_sorties_index') }}" class="btn btn-secondary">Retour à la liste</a>
 {% endblock %}
