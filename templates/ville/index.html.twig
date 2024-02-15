@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Ville index</h1>
-
+<div class="container mt-3">
     <table class="table">
         <thead>
             <tr>
@@ -32,6 +32,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('app_ville_new') }}">Create new</a>
 {% endblock %}
