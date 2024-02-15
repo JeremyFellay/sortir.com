@@ -1,9 +1,8 @@
- body {
+body {
      background-image: url('../img/fond1.jpg');
      background-size: cover;
      opacity: 0.9;
  }
-
 
 /* Nav barre
 nav ul {

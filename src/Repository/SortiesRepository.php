@@ -89,7 +89,7 @@ class SortiesRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-  //  public function findStillDisplayedSorties(Sorties $sorties): array
+    //  public function findStillDisplayedSorties(Sorties $sorties): array
   //  {
   //      $today = new DateTime('-1 month');
 // Récupérer les critères de filtrage depuis l'objet $oFilters
@@ -107,16 +107,6 @@ class SortiesRepository extends ServiceEntityRepository
             //    ->setParameter('campus', $campus);
         //}
  //   }
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -11,6 +11,7 @@ use App\Form\SortiesType;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\SortiesRepository;
+use App\Repository\UserRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,8 +81,9 @@ class SortiesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_sorties_show', methods: ['GET'])]
-    public function show(Sorties $sortie): Response
+    public function show(int $id,UserRepository $userRepository,Sorties $sortie): Response
     {
+
         return $this->render('sorties/show.html.twig', [
             'sortie' => $sortie,
         ]);
@@ -215,7 +217,8 @@ class SortiesController extends AbstractController
         return $this->redirectToRoute('app_sorties_index');
     }
 
-   // #[Route('/sorties/archives/{id}', name: 'app_sorties_archives', requirements: ['id' => '\d+'], methods: ['GET'])]
+
+     // #[Route('/sorties/archives/{id}', name: 'app_sorties_archives', requirements: ['id' => '\d+'], methods: ['GET'])]
     //   public function archiver(SortiesRepository $sortiesRepository)
     //  {
     //     $archives = $sortiesRepository->findStillDisplayedSorties();
