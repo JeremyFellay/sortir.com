@@ -50,21 +50,27 @@ class SortiesController extends AbstractController
     {
         // Création d'une nouvelle sortie
         $sortie = new Sorties();
+        // Récupération de l'utilisateur
         $user = $this->getUser();
 
-        // Initialisation des champs par défaut
+        // Attribution de l'utilisateur actuel comme organisateur de la sortie
         $sortie->setOrganisateur($user);
+        // Attribution du campus de l'utilisateur actuel à la sortie
         $sortie->setCampus($user->getCampus());
+        // Attribution de l'état 'Créée' à la sortie en recherchant l'état correspondant dans la BDD
         $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Créée']));
 
         // Création du formulaire de création de sortie
         $form = $this->createForm(SortiesType::class, $sortie);
         $form->handleRequest($request);
 
+        // Vérification si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Enregistrement de la sortie
+            // Attribution de l'utilisateur actuel comme organisateur de la sortie
             $sortie->setOrganisateur($user);
+            // Persiste la sortie dans la base de données
             $entityManager->persist($sortie);
+            // Applique les changements enregistrés dans la base de données
             $entityManager->flush();
 
             // Redirection vers la liste des sorties ou vers la page de publication de la sortie
@@ -74,7 +80,7 @@ class SortiesController extends AbstractController
 
             return $this->redirectToRoute('app_sorties_index');
         }
-
+        // Passage des variables à la vue
         return $this->render('sorties/new.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
