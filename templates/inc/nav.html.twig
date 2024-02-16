@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+<nav class="navbar navbar-expand-lg navbar p-3 border-bottom border-black">
     <div class="container-fluid">
         <img src="{{ asset('img/logo-gdm.jpeg') }}" alt="Logo" width="60" height="54" class="d-inline-block align-text-top text-white">
         <a class="navbar-brand" href="{{ path('app_sorties_index') }}">SORTIR.COM</a>
@@ -7,28 +7,28 @@
         </button>
 
         <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto ">
+            <ul class="navbar-nav ms-auto">
                 {% if app.user %}
                 <li class="nav-item">
-                    <a class="nav-link mx-2" aria-current="page" href="{{ path('app_sorties_index') }}">Accueil</a>
+                    <a class="nav-link mx-2 text-black fw-bold" aria-current="page" href="{{ path('app_sorties_index') }}">Accueil</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link mx-2 dropdown-toggle" href="{{ path('app_monprofil') }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil</a>
+                    <a class="nav-link mx-2 dropdown-toggle text-black fw-bold" href="{{ path('app_monprofil') }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ path('app_monprofil') }}">Mon profil</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_profilmodifier') }}">Modifier profil</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        <li><a class="dropdown-item text-black fw-bold" href="{{ path('app_monprofil') }}">Mon profil</a></li>
+                        <li><a class="dropdown-item text-black fw-bold" href="{{ path('app_profilmodifier') }}">Modifier profil</a></li>
+                        <li><a class="dropdown-item text-black fw-bold" href="{{ path('app_logout') }}">Se déconnecter</a></li>
                     </ul>
                 </li>
                 {% if is_granted("ROLE_ADMIN") %}
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="{{ path('app_ville_index') }}">Villes</a>
+                    <a class="nav-link mx-2 text-black fw-bold" href="{{ path('app_ville_index') }}">Villes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="{{ path('app_campus_index') }}">Campus</a>
+                    <a class="nav-link mx-2 text-black fw-bold" href="{{ path('app_campus_index') }}">Campus</a>
                 </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-2" href="{{ path('app_register') }}">Créer un utilisateur</a>
+                        <a class="nav-link mx-2 text-black fw-bold" href="{{ path('app_register') }}">Créer un utilisateur</a>
                     </li>
                 {% endif %}
                 {% endif %}

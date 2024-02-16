@@ -86,7 +86,6 @@ class SortiesType extends AbstractType
             ]);
     }
 
-
         /*            $formModifier = function (FormInterface $form, Ville $ville = null): void
             {
                 $lieu = null === $ville ? [] : $ville->getLieu();
