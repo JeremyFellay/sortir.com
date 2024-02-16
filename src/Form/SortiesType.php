@@ -53,19 +53,41 @@ class SortiesType extends AbstractType
                 'class' => Ville::class,
                 'choice_label' => 'nom',
                 'mapped' => false,
-                'choice_value'=> function (?Ville $ville) {
-                    return $ville ? $ville->getId() : '';
-                }
-                    ])
+            ])
+            ->add('lieu', EntityType::class, [
+                'class' => Lieu::class,
+                'choice_label' => 'nom',
+            ])
+            ->add('rue', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'rue'
+            ])
+            ->add('codePostal', EntityType::class, [
+                'class' => Ville::class,
+                'mapped' => false,
+                'choice_label' => 'code_postal'
+            ])
+            ->add('latitude', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'latitude'
+            ])
+            ->add('longitude', EntityType::class, [
+                'class' => Lieu::class,
+                'mapped' => false,
+                'choice_label' => 'longitude'
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ])
+            ->add('saveAndAdd', SubmitType::class, [
+                'label' => 'Publier une sortie'
+            ]);
+    }
 
-        ->add('save', SubmitType::class, [
-        'label' => 'Enregistrer'
-    ])
-        ->add('saveAndAdd', SubmitType::class, [
-            'label' => 'Publier une sortie'
-        ]);
 
-            $formModifier = function (FormInterface $form, Ville $ville = null): void
+        /*            $formModifier = function (FormInterface $form, Ville $ville = null): void
             {
                 $lieu = null === $ville ? [] : $ville->getLieu();
                 $form->add('lieu', EntityType::class, [
@@ -107,28 +129,8 @@ class SortiesType extends AbstractType
                     $ville = $data['ville'];
                 }
             })
+*/
 
-            ->add('rue', EntityType::class, [
-                'class' => Lieu::class,
-                'mapped' => false,
-                'choice_label' => 'rue'
-            ])
-            ->add('codePostal', EntityType::class, [
-                'class' => Ville::class,
-                'mapped' => false,
-                'choice_label' => 'code_postal'
-            ])
-            ->add('latitude', EntityType::class, [
-                'class' => Lieu::class,
-                'mapped' => false,
-                'choice_label' => 'latitude'
-            ])
-            ->add('longitude', EntityType::class, [
-                'class' => Lieu::class,
-                'mapped' => false,
-                'choice_label' => 'longitude'
-            ])
-            */
 
 
     public function configureOptions(OptionsResolver $resolver): void

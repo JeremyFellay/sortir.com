@@ -39,6 +39,11 @@ security:
     access_control:
          - { path: ^/inscription$, roles: ROLE_ADMIN }
          - { path: ^/profile$, roles: ROLE_USER }
+         - { path: ^/register$, roles: ROLE_ADMIN}
+         - { path: ^/sorties/, roles: ROLE_USER}
+         - { path: ^/profil, roles: ROLE_USER}
+         - { path: ^/campus, roles: ROLE_ADMIN}
+         - { path: ^/ville/, roles: ROLE_ADMIN}
 
 when@test:
     security:

@@ -6,28 +6,46 @@
 
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-3 ">
+
+            <div class="col-5 ">
             <h1 class="text-center mt-3 pt-3 display-9 fw-bold">Mon profil </h1>
 
-            <form class="row justify-content-center">
-            <label>Pseudo : {{ app.user.pseudo }}</label>
-            <label>Prénom : {{ app.user.prenom }}</label>
-            <label>Nom : {{ app.user.nom }}</label>
-            <label>Téléphone : {{ app.user.telephone }}</label>
-            <label>Email : {{ app.user.email }}</label>
-           <label>Campus : {{ app.user.campus.nom }}</label>
+            <div class="mb-3">
+                <label for="" class="form-label required">Pseudo</label>
+                <input type="text" value="{{ app.user.pseudo }}" name="" required="required" maxlength="50" class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label required">Prénom</label>
+                <input type="text" value="{{ app.user.prenom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label required">Nom</label>
+                <input type="text" value="{{ app.user.nom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+            </div>
+                <div class="mb-3">
+                    <label for="" class="form-label required">Téléphone</label>
+                    <input type="text" value="{{ app.user.telephone }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label required">Campus</label>
+                    <input type="text" value="{{ app.user.campus.nom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label required">Email</label>
+                        <input type="text" value="{{ app.user.email }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                    </div>
+
+        </div>
+    </div>
+    </div>
 
                 <div class="justify-content-center text-center">
                 <a href="{{ path('app_profilmodifier') }}" class="btn btn-lg btn-primary">Modifier</a>
                 <a href="{{ path('app_sorties_index') }}" class="btn btn-lg btn-secondary">Retour</a>
-                <a href="{{ path('app_profilmodifiermdp') }}" class="btn btn-danger">Modifier mon mot de passe </a>
+                <a href="{{ path('app_profilmodifiermdp') }}" class="btn btn-lg btn-danger">Modifier mon mot de passe </a>
 
                 </div>
-
-            </form>
-            </div>
-        </div>
-    </div>
-
 
 {% endblock %}

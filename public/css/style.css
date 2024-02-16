@@ -1,35 +1,16 @@
 body {
-   /*  background-image: url('../img/fond1.jpg');
-     background-size: cover; */
-     opacity: 0.9;
+background-image: url('../img/fond1.jpg');
+    background-size: cover;
+opacity: 0.9;
     padding-bottom: 50px;
- }
+
+}
 .navbar-brand {
     font-family: Montserrat;
     font-weight: 800;
-}
-/* Nav barre
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    padding-left: 20px;
 }
 
-nav li {
-    float: left;
-}
 
-nav li a {
-    display: block;
-    color: #e693e8;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-nav li a:hover {
-    background-color: #111;
-} */
 
-/* Boutons */
 
