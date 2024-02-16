@@ -7,27 +7,43 @@
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
 
-    <div class="example-wrapper">
-        <h2> {{ user.pseudo}} </h2>
+            <div class="col-5 ">
+                <h1 class="text-center mt-3 pt-3 display-9 fw-bold">{{ user.pseudo }} </h1>
 
-        <div>
-            <div>Prénom : {{ user.prenom }}</div>
-            <div>Nom : {{ user.nom }}</div>
-            <div>Téléphone : {{ user.telephone }}</div>
-            <div>Email : {{ user.email }}</div>
-          <div>Campus : {{ user.campus.nom }}</div>
-            <div>
 
-                <a href="{{ path('app_sorties_index') }}" class="#">Retour</a>
+                <div class="mb-3">
+                    <label for="" class="form-label required">Prénom</label>
+                    <input type="text" value="{{ user.prenom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label required">Nom</label>
+                    <input type="text" value="{{ user.nom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label required">Téléphone</label>
+                    <input type="text" value="{{ user.telephone }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label required">Campus</label>
+                    <input type="text" value="{{ user.campus.nom }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label required">Email</label>
+                    <input type="text" value="{{ user.email }}" name="" required="required" maxlength="50" class="form-control" readonly>
+                </div>
+
             </div>
         </div>
-        {# {{ form_start() }}
-            {{ form_widget() }}
-
-            <button type="submit" class="btn">Enregistrer</button>
-            <button type="button" class="btn">Annuler</button>
-            {{ form_end() }} #}
-
     </div>
+
+
+            <div class="justify-content-center text-center">
+                <a href="{{ path('app_sorties_index') }}" class="btn btn-lg btn-secondary">Retour</a>
+            </div>
+
 {% endblock %}

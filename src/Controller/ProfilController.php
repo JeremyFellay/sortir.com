@@ -47,7 +47,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/monprofil', name: 'app_monprofil')]
+    #[Route('/profil', name: 'app_monprofil')]
     public function index(): Response
     {
         return $this->render('profil/monprofil.html.twig', [
@@ -86,7 +86,7 @@ class ProfilController extends AbstractController
                 'ChangePasswordForm' => $form->createView(),
             ]);
         }
-    #[Route('/autreprofil/{id}', name: 'app_autreprofil', methods: ['GET'])]
+    #[Route('/profil/autreprofil/{id}', name: 'app_autreprofil', methods: ['GET'])]
     public function autreprofil(int $id, UserRepository $userRepository): Response
     {
         $user=$userRepository -> find($id);

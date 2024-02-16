@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
     <div class="container-fluid">
+        <img src="{{ asset('img/logo-gdm.jpeg') }}" alt="Logo" width="60" height="54" class="d-inline-block align-text-top text-white">
         <a class="navbar-brand" href="{{ path('app_sorties_index') }}">SORTIR.COM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,19 +38,3 @@
 </nav>
 
 
-{# <nav>
-    <ul>
-        {% if app.user %}
-        <li><a href="{{ path('app_sorties_index') }}" title="Accueil">Accueil</a></li>
-        <li><a href="{{ path('app_monprofil') }}" title="Mon profil">Mon profil</a></li>
-        <li><a href="{{ path('app_logout') }}" title="Se déconnecter">Se déconnecter</a></li>
-
-            {% if is_granted("ROLE_ADMIN") %}
-                <li><a href="{{ path('app_register') }}" title="Créer utilisateur">Créer utilisateur</a></li>
-                <li><a href="{{ path('app_villes')}}" title="Villes">Villes</a></li>
-                <li><a href="{{ path('app_campus') }}" title="Campus">Campus</a></li>
-
-            {% endif %}
-        {% endif %}
-    </ul>
-</nav> #}

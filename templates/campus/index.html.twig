@@ -8,7 +8,6 @@
     <table class="table table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +15,11 @@
         <tbody>
         {% for campus in campuses %}
             <tr>
-                <td>{{ campus.id }}</td>
                 <td>{{ campus.nom }}</td>
                 <td>
                     <a href="{{ path('app_campus_show', {'id': campus.id}) }}">Afficher</a>
                     <a href="{{ path('app_campus_edit', {'id': campus.id}) }}">Modifier</a>
+                    <a href="{{ path('app_campus_delete', {'id': campus.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
