@@ -62,21 +62,14 @@ class ProfilController extends AbstractController
         $form = $this->createForm(ChangePasswordFormType::class, $user);
         $form->handleRequest($request);
 
-            // TO DO : RAJOUTER VÉRIF MOT DE PASSE ACTUEL
-
             if ($form->isSubmitted() && $form->isValid()) {
-
                 $motDePasse = $form['motDePasse']->getData();
                 //S l'utilsateur saisi un nouveau de mot de passe, on le vérifie et on modifie l'attribut mot de passe s'il est valide.
-                if (!is_null($motDePasse) && !empty(trim($motDePasse))) {
+
                     $user->setPassword(
                         $hasher->hashPassword($user, $motDePasse)
                     );
-                }
-                if (!is_null($motDePasse) && empty($motDePasse)) {
-                    $this->addFlash('warning', 'Le mot de passe ne peut être une chaîne vide !');
-                    return $this->redirectToRoute('app_profilmodifiermdp');
-                }
+
                 $entityManager->persist($user);
                 $entityManager->flush();
 
@@ -87,7 +80,6 @@ class ProfilController extends AbstractController
 
                 return $this->redirectToRoute('app_monprofil');
             }
-
             $entityManager->refresh($user);
 
             return $this->render('profil/modifiermotdepasse.html.twig', [

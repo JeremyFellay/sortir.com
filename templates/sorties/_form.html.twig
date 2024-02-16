@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
 
-        <div class="col-5 text-primary">
+        <div class="col-5 fw-bold">
 {{ form_start(form) }}
 
             {{ form_errors(form) }}
@@ -15,10 +15,10 @@
             Campus : {{ app.user.campus.nom }}
             {{ form_row(form.ville) }}
             {{ form_row(form.lieu) }}
-            {{ form_row(form.rue) }}
+           {#  {{ form_row(form.rue) }}
             {{ form_row(form.codePostal) }}
             {{ form_row(form.latitude) }}
-            {{ form_row(form.longitude) }}
+            {{ form_row(form.longitude) }} #}
 
 
            {# <div class="justify-content-center text-center">

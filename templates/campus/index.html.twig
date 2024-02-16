@@ -3,9 +3,9 @@
 {% block title %}Campus index{% endblock %}
 
 {% block body %}
-    <h1>Liste des campus </h1>
+    <h1 class="text-center mt-3 pt-3 display-9 fw-bold">Liste des campus </h1>
 <div class="container mt-3">
-    <table class="table">
+    <table class="table table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,5 +31,8 @@
         </tbody>
     </table>
 </div>
-    <a href="{{ path('app_campus_new') }}">Ajouter un nouveau campus </a>
+
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('app_campus_new') }}" class="btn btn-primary text-white">Ajouter un nouveau campus</a>
+    </div>
 {% endblock %}
