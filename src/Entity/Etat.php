@@ -23,6 +23,7 @@ class Etat
 
     public function __construct()
     {
+        // Initialisation de la collection de sorties
         $this->sortie = new ArrayCollection();
     }
 
@@ -51,6 +52,7 @@ class Etat
         return $this->sortie;
     }
 
+    // Ajouter une sortie à l'état
     public function addSortie(Sorties $sortie): static
     {
         if (!$this->sortie->contains($sortie)) {
@@ -61,10 +63,11 @@ class Etat
         return $this;
     }
 
+    // Supprimer une sortie de l'état
     public function removeSortie(Sorties $sortie): static
     {
         if ($this->sortie->removeElement($sortie)) {
-            // set the owning side to null (unless already changed)
+            // Définir l'état de la sortie sur null
             if ($sortie->getEtat() === $this) {
                 $sortie->setEtat(null);
             }

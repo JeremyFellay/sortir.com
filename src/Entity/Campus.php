@@ -26,9 +26,9 @@ class Campus
 
     public function __construct()
     {
+        // Initialisation des collections d'utilisateurs et de sorties
         $this->users = new ArrayCollection();
         $this->sortie = new ArrayCollection();
-        $this->sorties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,6 +56,7 @@ class Campus
         return $this->users;
     }
 
+    // Ajouter un utilisateur au campus
     public function addUser(User $user): static
     {
         if (!$this->users->contains($user)) {
@@ -66,10 +67,11 @@ class Campus
         return $this;
     }
 
+    // Supprimer un utilisateur du campus
     public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
+            // Définir le campus de l'utilisateur sur null
             if ($user->getCampus() === $this) {
                 $user->setCampus(null);
             }
@@ -86,6 +88,7 @@ class Campus
         return $this->sortie;
     }
 
+    // Ajouter une sortie au campus
     public function addSortie(Sorties $sortie): static
     {
         if (!$this->sortie->contains($sortie)) {
@@ -96,23 +99,16 @@ class Campus
         return $this;
     }
 
+    // Supprimer une sortie du campus
     public function removeSortie(Sorties $sortie): static
     {
         if ($this->sortie->removeElement($sortie)) {
-            // set the owning side to null (unless already changed)
+            // Définir le campus de la sortie sur null
             if ($sortie->getCampus() === $this) {
                 $sortie->setCampus(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Sorties>
-     */
-    public function getSorties(): Collection
-    {
-        return $this->sorties;
     }
 }

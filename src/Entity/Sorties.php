@@ -24,14 +24,14 @@ class Sorties
     #[Assert\GreaterThanOrEqual('today')]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $duree = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\LessThan(propertyPath: "dateHeureDebut")]
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $nbInscriptionsMax = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -56,10 +56,9 @@ class Sorties
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
-
-
     public function __construct()
     {
+        // Initialisation de la collection d'utilisateurs
         $this->users = new ArrayCollection();
     }
 
@@ -75,6 +74,7 @@ class Sorties
 
     public function setNom(string $nom): static
     {
+        // Setter pour définir le nom de la sortie
         $this->nom = $nom;
 
         return $this;
@@ -87,6 +87,7 @@ class Sorties
 
     public function setdateHeureDebut(\DateTimeInterface $dateHeureDebut): static
     {
+        // Setter pour définir la date et l'heure de début de la sortie
         $this->dateHeureDebut = $dateHeureDebut;
 
         return $this;
@@ -99,6 +100,7 @@ class Sorties
 
     public function setDuree(int $duree): static
     {
+        // Setter pour définir la durée de la sortie
         $this->duree = $duree;
 
         return $this;
@@ -111,6 +113,7 @@ class Sorties
 
     public function setDateLimiteInscription(\DateTimeInterface $dateLimiteInscription): static
     {
+        // Setter pour définir la date limite d'inscription à la sortie
         $this->dateLimiteInscription = $dateLimiteInscription;
 
         return $this;
@@ -123,6 +126,7 @@ class Sorties
 
     public function setNbInscriptionsMax(int $nbInscriptionsMax): static
     {
+        // Setter pour définir le nombre maximum d'inscriptions à la sortie
         $this->nbInscriptionsMax = $nbInscriptionsMax;
 
         return $this;
@@ -135,6 +139,7 @@ class Sorties
 
     public function setInfosSortie(string $infosSortie): static
     {
+        // Setter pour définir les informations supplémentaires sur la sortie
         $this->infosSortie = $infosSortie;
 
         return $this;
@@ -147,6 +152,7 @@ class Sorties
 
     public function setOrganisateur(?User $organisateur): static
     {
+        // Setter pour définir l'organisateur de la sortie
         $this->organisateur = $organisateur;
 
         return $this;
@@ -157,9 +163,11 @@ class Sorties
      */
     public function getUsers(): Collection
     {
+        // Getter pour obtenir la collection des utilisateurs inscrits à la sortie
         return $this->users;
     }
 
+    // Ajouter un utilisateur à la liste des inscrits à la sortie
     public function addUser(User $user): static
     {
         if (!$this->users->contains($user)) {
@@ -170,6 +178,7 @@ class Sorties
         return $this;
     }
 
+    // Supprimer un utilisateur de la liste des inscrits à la sortie
     public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
@@ -186,6 +195,7 @@ class Sorties
 
     public function setCampus(?Campus $campus): static
     {
+        // Setter pour définir le campus de la sortie
         $this->campus = $campus;
 
         return $this;
@@ -198,6 +208,7 @@ class Sorties
 
     public function setLieu(?Lieu $lieu): static
     {
+        // Setter pour définir le lieu de la sortie
         $this->lieu = $lieu;
 
         return $this;
@@ -210,9 +221,10 @@ class Sorties
 
     public function setEtat(?Etat $etat): static
     {
+        // Setter pour définir l'état de la sortie
         $this->etat = $etat;
 
         return $this;
     }
-
 }
+

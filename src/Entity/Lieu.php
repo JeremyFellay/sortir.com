@@ -6,7 +6,6 @@ use App\Repository\LieuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: LieuRepository::class)]
 class Lieu
@@ -36,6 +35,7 @@ class Lieu
 
     public function __construct()
     {
+        // Initialisation de la collection de sorties
         $this->sortie = new ArrayCollection();
     }
 
@@ -51,6 +51,7 @@ class Lieu
 
     public function setNom(string $nom): static
     {
+        // Setter pour définir le nom du lieu
         $this->nom = $nom;
 
         return $this;
@@ -63,6 +64,7 @@ class Lieu
 
     public function setRue(string $rue): static
     {
+        // Setter pour définir la rue du lieu
         $this->rue = $rue;
 
         return $this;
@@ -75,6 +77,7 @@ class Lieu
 
     public function setLatitude(float $latitude): static
     {
+        // Setter pour définir la latitude du lieu
         $this->latitude = $latitude;
 
         return $this;
@@ -87,6 +90,7 @@ class Lieu
 
     public function setLongitude(float $longitude): static
     {
+        // Setter pour définir la longitude du lieu
         $this->longitude = $longitude;
 
         return $this;
@@ -99,6 +103,7 @@ class Lieu
 
     public function setVille(?Ville $ville): static
     {
+        // Setter pour définir la ville du lieu
         $this->ville = $ville;
 
         return $this;
@@ -109,9 +114,11 @@ class Lieu
      */
     public function getSortie(): Collection
     {
+        // Getter pour obtenir la collection des sorties associées à ce lieu
         return $this->sortie;
     }
 
+    // Ajouter une sortie au lieu
     public function addSortie(Sorties $sortie): static
     {
         if (!$this->sortie->contains($sortie)) {
@@ -122,10 +129,11 @@ class Lieu
         return $this;
     }
 
+    // Supprimer une sortie du lieu
     public function removeSortie(Sorties $sortie): static
     {
         if ($this->sortie->removeElement($sortie)) {
-            // set the owning side to null (unless already changed)
+            // Définir le lieu de la sortie sur null
             if ($sortie->getLieu() === $this) {
                 $sortie->setLieu(null);
             }

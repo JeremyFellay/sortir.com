@@ -10,11 +10,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Ce mail est déjà utilisé', errorPath: 'email')]
 #[UniqueEntity(fields: ['pseudo'], message: 'Ce pseudo est déjà utilisé', errorPath: 'pseudo')]
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -61,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        // Initialisation des collections de sorties
         $this->sorties = new ArrayCollection();
         $this->sortie = new ArrayCollection();
     }
@@ -77,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
+        // Setter pour définir l'email de l'utilisateur
         $this->email = $email;
 
         return $this;
@@ -98,7 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // garantir que chaque utilisateur a au moins le rôle ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -106,6 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): static
     {
+        // Setter pour définir les rôles de l'utilisateur
         $this->roles = $roles;
 
         return $this;
@@ -121,6 +122,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
+        // Setter pour définir le mot de passe de l'utilisateur
         $this->password = $password;
 
         return $this;
@@ -131,7 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // Si vous stockez des données temporaires ou sensibles sur l'utilisateur, effacez-les ici
         // $this->plainPassword = null;
     }
 
@@ -142,6 +144,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPseudo(string $pseudo): static
     {
+        // Setter pour définir le pseudo de l'utilisateur
         $this->pseudo = $pseudo;
 
         return $this;
@@ -154,6 +157,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPrenom(string $prenom): static
     {
+        // Setter pour définir le prénom de l'utilisateur
         $this->prenom = $prenom;
 
         return $this;
@@ -166,6 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setNom(string $nom): static
     {
+        // Setter pour définir le nom de l'utilisateur
         $this->nom = $nom;
 
         return $this;
@@ -178,6 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setTelephone(string $telephone): static
     {
+        // Setter pour définir le numéro de téléphone de l'utilisateur
         $this->telephone = $telephone;
 
         return $this;
@@ -190,6 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPhoto(?string $photo): static
     {
+        // Setter pour définir la photo de profil de l'utilisateur
         $this->photo = $photo;
 
         return $this;
@@ -200,6 +207,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getSorties(): Collection
     {
+        // Getter pour obtenir la collection des sorties organisées par l'utilisateur
         return $this->sorties;
     }
 
@@ -210,6 +218,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setCampus(?Campus $campus): static
     {
+        // Setter pour définir le campus de l'utilisateur
         $this->campus = $campus;
 
         return $this;
@@ -220,11 +229,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getSortie(): Collection
     {
+        // Getter pour obtenir la collection des sorties auxquelles l'utilisateur est inscrit
         return $this->sortie;
     }
 
     public function addSortie(Sorties $sortie): static
     {
+        // Ajouter une sortie à la liste des sorties auxquelles l'utilisateur est inscrit
         if (!$this->sortie->contains($sortie)) {
             $this->sortie->add($sortie);
         }
@@ -234,6 +245,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeSortie(Sorties $sortie): static
     {
+        // Supprimer une sortie de la liste des sorties auxquelles l'utilisateur est inscrit
         $this->sortie->removeElement($sortie);
 
         return $this;
